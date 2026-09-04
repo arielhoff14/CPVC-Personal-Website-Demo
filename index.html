@@ -1,553 +1,1082 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Regal Modern</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <style>
-        /* CSS Variables for Regal Dark Theme */
-        :root {
-            --bg-base: #09090b;
-            --bg-surface: #141418;
-            --bg-surface-elevated: #1e1e24;
-            --accent-gold: #c5a059;
-            --accent-gold-glow: rgba(197, 160, 89, 0.2);
-            --text-primary: #eaeaea;
-            --text-secondary: #9a9a9a;
-            --border-subtle: #2a2a35;
-            
-            --font-heading: 'Playfair Display', serif;
-            --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
+```
+<link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+<link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+<link href="[https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap](https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap)" rel="stylesheet">
 
-        /* Reset & Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+    :root {
+        /* Palette */
+        --bg-charcoal: #171A1F;
+        --surface-gunmetal: #252B33;
+        --bg-midnight: #102A43;
+        --interact-blue: #3C73D9;
+        --interact-blue-hover: #4A84ED;
+        --accent-gold: #C7A35A;
+        --text-ivory: #F2E9D8;
+        --text-gray: #AAB2BD;
+        
+        /* Typography */
+        --font-display: 'Cormorant Garamond', serif;
+        --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        
+        /* Spacing & Layout */
+        --section-padding: 8rem 5%;
+        --container-max: 1200px;
+        --nav-height: 80px;
+        
+        /* Transitions */
+        --transition-base: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        --transition-slow: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-        html {
-            scroll-behavior: smooth;
-            background-color: var(--bg-base);
-            color: var(--text-primary);
-            font-family: var(--font-body);
-            line-height: 1.6;
-        }
+    /* Reset & Base Styles */
+    *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
 
-        body {
-            overflow-x: hidden;
-            background: radial-gradient(circle at 50% 0%, #1a1a22 0%, var(--bg-base) 70%);
-            min-height: 100vh;
-        }
+    body {
+        background-color: var(--bg-charcoal);
+        color: var(--text-ivory);
+        font-family: var(--font-sans);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+    }
 
-        h1, h2, h3, h4 {
-            font-family: var(--font-heading);
-            font-weight: 600;
-            line-height: 1.2;
-        }
+    h1, h2, h3, h4, .display-text {
+        font-family: var(--font-display);
+        font-weight: 500;
+        line-height: 1.2;
+        color: var(--text-ivory);
+    }
 
-        a {
-            color: var(--text-primary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+    p {
+        color: var(--text-gray);
+        font-size: 1.125rem;
+        margin-bottom: 1.5rem;
+    }
 
-        a:hover {
-            color: var(--accent-gold);
-        }
+    a {
+        color: inherit;
+        text-decoration: none;
+        transition: var(--transition-base);
+    }
 
-        /* Typography Highlights */
-        .gold-text {
-            color: var(--accent-gold);
-            font-style: italic;
-        }
+    .container {
+        max-width: var(--container-max);
+        margin: 0 auto;
+        position: relative;
+        z-index: 10;
+    }
 
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.5rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(9, 9, 11, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            z-index: 1000;
-            transition: padding 0.3s ease;
-        }
+    /* Typography Utilities */
+    .label {
+        font-family: var(--font-sans);
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        font-size: 0.75rem;
+        color: var(--accent-gold);
+        font-weight: 600;
+        display: block;
+        margin-bottom: 1rem;
+    }
 
-        .nav-logo {
-            font-family: var(--font-heading);
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: var(--accent-gold);
-        }
+    .section-title {
+        font-size: 3rem;
+        margin-bottom: 3rem;
+        position: relative;
+        display: inline-block;
+    }
 
+    /* Buttons */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem 2rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border-radius: 2px;
+        cursor: pointer;
+        transition: var(--transition-base);
+        border: 1px solid transparent;
+    }
+
+    .btn-primary {
+        background-color: var(--interact-blue);
+        color: var(--text-ivory);
+        box-shadow: 0 4px 14px rgba(60, 115, 217, 0.2);
+    }
+
+    .btn-primary:hover, .btn-primary:focus {
+        background-color: var(--interact-blue-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(60, 115, 217, 0.4);
+    }
+
+    .btn-secondary {
+        background-color: transparent;
+        color: var(--text-ivory);
+        border-color: rgba(242, 233, 216, 0.2);
+    }
+
+    .btn-secondary:hover, .btn-secondary:focus {
+        border-color: var(--accent-gold);
+        color: var(--accent-gold);
+    }
+
+    .btn-group {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    /* Navigation */
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--nav-height);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 5%;
+        background: rgba(23, 26, 31, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        z-index: 100;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        transition: var(--transition-base);
+    }
+
+    .nav-logo {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        color: var(--text-ivory);
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+    }
+
+    .nav-links a {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-gray);
+        position: relative;
+    }
+
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 1px;
+        bottom: -4px;
+        left: 0;
+        background-color: var(--accent-gold);
+        transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+        color: var(--text-ivory);
+    }
+
+    .nav-links a:hover::after, .nav-links a.active::after {
+        width: 100%;
+    }
+
+    .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--text-ivory);
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+
+    .mobile-menu-btn svg {
+        width: 24px;
+        height: 24px;
+        fill: currentColor;
+    }
+
+    /* Hero Section (Architectural CSS Background) */
+    .hero {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: var(--section-padding);
+        padding-top: calc(var(--nav-height) + 4rem);
+        overflow: hidden;
+        background: linear-gradient(135deg, var(--bg-charcoal) 0%, var(--bg-midnight) 150%);
+    }
+
+    /* Abstract Architectural Elements */
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -10%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(90deg, #121418 0%, rgba(23, 26, 31, 0.9) 100%);
+        transform: skewX(-15deg);
+        z-index: 1;
+        box-shadow: 20px 0 50px rgba(0,0,0,0.5);
+    }
+
+    .hero::after {
+        content: '';
+        position: absolute;
+        bottom: -15vh;
+        right: -5vw;
+        width: 110vw;
+        height: 40vh;
+        background: linear-gradient(to top, var(--surface-gunmetal) 0%, var(--bg-charcoal) 100%);
+        border-top: 1px solid rgba(199, 163, 90, 0.6);
+        border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+        box-shadow: 0 -4px 30px rgba(199, 163, 90, 0.15), inset 0 2px 10px rgba(199, 163, 90, 0.3);
+        z-index: 1;
+        transform: rotate(-2deg);
+    }
+
+    .hero-horizon {
+        position: absolute;
+        top: 45%;
+        right: 10%;
+        width: 60%;
+        height: 2px;
+        background: radial-gradient(circle, rgba(199, 163, 90, 0.8) 0%, transparent 70%);
+        z-index: 0;
+        opacity: 0.6;
+        filter: blur(4px);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 10;
+        max-width: 700px;
+    }
+
+    .hero h1 {
+        font-size: clamp(3rem, 5vw, 5rem);
+        margin-bottom: 1.5rem;
+    }
+
+    .hero p.lead {
+        font-size: clamp(1.125rem, 2vw, 1.375rem);
+        color: var(--text-ivory);
+        opacity: 0.9;
+        margin-bottom: 2.5rem;
+        max-width: 600px;
+    }
+
+    /* Sections General */
+    section {
+        padding: var(--section-padding);
+        position: relative;
+        z-index: 10;
+    }
+
+    section:nth-child(even) {
+        background-color: rgba(37, 43, 51, 0.3);
+        border-top: 1px solid rgba(255, 255, 255, 0.02);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+    }
+
+    /* Story Section */
+    .story-grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 4rem;
+    }
+    
+    .story-text p {
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Motivations Section */
+    .motivations {
+        text-align: center;
+    }
+
+    .editorial-quote {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 3vw, 3rem);
+        color: var(--text-ivory);
+        line-height: 1.3;
+        max-width: 900px;
+        margin: 0 auto 4rem;
+        font-style: italic;
+    }
+
+    .principles-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        text-align: left;
+    }
+
+    .principle-card {
+        background: var(--surface-gunmetal);
+        padding: 2.5rem;
+        border-radius: 4px;
+        border-top: 2px solid var(--interact-blue);
+        transition: var(--transition-base);
+    }
+
+    .principle-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        border-top-color: var(--accent-gold);
+    }
+
+    .principle-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        font-family: var(--font-sans);
+        font-weight: 600;
+    }
+
+    /* Skills Section */
+    .skills-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 3rem;
+    }
+
+    .skill-group {
+        position: relative;
+        padding-left: 1.5rem;
+        border-left: 1px solid rgba(199, 163, 90, 0.3);
+    }
+
+    .skill-group::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -4px;
+        width: 7px;
+        height: 7px;
+        background: var(--accent-gold);
+        border-radius: 50%;
+    }
+
+    .skill-group h3 {
+        font-family: var(--font-sans);
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+        color: var(--text-ivory);
+    }
+
+    .skill-group p {
+        font-size: 1rem;
+    }
+
+    /* Work Section */
+    .projects-list {
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+    }
+
+    .project-item {
+        background: var(--surface-gunmetal);
+        padding: 4rem;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.03);
+        transition: var(--transition-base);
+    }
+
+    .project-item:hover {
+        border-color: rgba(60, 115, 217, 0.4);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .project-item::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 30%;
+        height: 100%;
+        background: radial-gradient(ellipse at right, rgba(199, 163, 90, 0.05) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .project-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .project-title {
+        font-size: 2.5rem;
+        margin: 0;
+    }
+
+    .project-meta {
+        font-family: var(--font-sans);
+        font-size: 0.875rem;
+        color: var(--text-gray);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+
+    .project-content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 3rem;
+    }
+
+    .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .tag {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.8rem;
+        background: rgba(255,255,255,0.05);
+        border-radius: 100px;
+        color: var(--text-ivory);
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .project-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--interact-blue);
+        font-weight: 500;
+        margin-top: 2rem;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .project-link:hover {
+        color: var(--accent-gold);
+        gap: 0.8rem;
+    }
+
+    /* Credentials Section */
+    .credential-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .credential-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: var(--transition-base);
+    }
+
+    .credential-item:hover {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        background: rgba(255,255,255,0.02);
+        border-bottom-color: var(--accent-gold);
+    }
+
+    .cred-details h3 {
+        font-family: var(--font-sans);
+        font-size: 1.25rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .cred-org {
+        color: var(--text-gray);
+        font-size: 0.9rem;
+    }
+
+    .cred-year {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        color: var(--accent-gold);
+    }
+
+    /* Interests Section */
+    .interests-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .interest-pill {
+        padding: 1rem 2rem;
+        background: transparent;
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 4px;
+        font-size: 1rem;
+        color: var(--text-gray);
+        transition: var(--transition-base);
+    }
+
+    .interest-pill:hover {
+        border-color: var(--interact-blue);
+        color: var(--text-ivory);
+        background: rgba(60, 115, 217, 0.05);
+    }
+
+    /* Contact Section */
+    .contact {
+        text-align: center;
+        padding-top: 10rem;
+        padding-bottom: 10rem;
+        background: radial-gradient(circle at 50% 100%, rgba(16, 42, 67, 0.4) 0%, var(--bg-charcoal) 100%);
+    }
+
+    .contact-title {
+        font-size: clamp(3rem, 5vw, 4.5rem);
+        margin-bottom: 2rem;
+    }
+
+    .contact-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 3rem;
+        flex-wrap: wrap;
+    }
+
+    .contact-link {
+        font-size: 1.125rem;
+        color: var(--text-ivory);
+        border-bottom: 1px solid rgba(242, 233, 216, 0.3);
+        padding-bottom: 0.25rem;
+    }
+
+    .contact-link:hover {
+        color: var(--accent-gold);
+        border-bottom-color: var(--accent-gold);
+    }
+
+    /* Footer */
+    footer {
+        background-color: #0d0f12;
+        padding: 4rem 5%;
+        border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+        max-width: var(--container-max);
+        margin: 0 auto;
+    }
+
+    .footer-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .footer-logo {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+
+    .footer-tagline {
+        font-size: 0.875rem;
+        color: var(--text-gray);
+    }
+
+    .footer-links {
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    .footer-links a {
+        font-size: 0.875rem;
+        color: var(--text-gray);
+    }
+    
+    .footer-links a:hover {
+        color: var(--text-ivory);
+    }
+
+    /* Animation & Reveal Classes */
+    .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: var(--transition-slow);
+    }
+
+    .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Media Queries */
+    @media (max-width: 992px) {
+        .story-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        .project-content {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        .project-item {
+            padding: 2.5rem;
+        }
+    }
+
+    @media (max-width: 768px) {
         .nav-links {
-            display: flex;
+            position: fixed;
+            top: var(--nav-height);
+            left: 0;
+            width: 100%;
+            height: calc(100vh - var(--nav-height));
+            background: var(--bg-charcoal);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             gap: 2.5rem;
+            transform: translateX(100%);
+            transition: transform 0.4s ease;
+            z-index: 99;
+        }
+        
+        .nav-links.nav-active {
+            transform: translateX(0);
         }
 
         .nav-links a {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 500;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 0 10%;
-            position: relative;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            right: 10%;
-            width: 400px;
-            height: 400px;
-            background: var(--accent-gold);
-            filter: blur(150px);
-            opacity: 0.1;
-            border-radius: 50%;
-            z-index: -1;
-            transform: translateY(-50%);
-        }
-
-        .hero-subtitle {
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: var(--accent-gold);
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .hero-title {
-            font-size: clamp(3rem, 8vw, 6rem);
-            margin-bottom: 1.5rem;
-            color: #ffffff;
-            max-width: 900px;
-        }
-
-        .hero-description {
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin-bottom: 3rem;
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            border: 1px solid var(--accent-gold);
-            color: var(--accent-gold);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.85rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            background: transparent;
-            cursor: pointer;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--accent-gold);
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.4s ease;
-            z-index: -1;
-        }
-
-        .btn:hover {
-            color: var(--bg-base);
-        }
-
-        .btn:hover::before {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-
-        /* Sections */
-        section {
-            padding: 8rem 10%;
-            position: relative;
-        }
-
-        .section-header {
-            margin-bottom: 4rem;
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .section-header h2 {
-            font-size: 3rem;
-            color: #ffffff;
-        }
-
-        .section-line {
-            height: 1px;
-            flex-grow: 1;
-            background: linear-gradient(90deg, var(--accent-gold), transparent);
-            opacity: 0.5;
-        }
-
-        /* Goals Grid */
-        .goals-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .goal-card {
-            background: var(--bg-surface);
-            padding: 3rem 2rem;
-            border: 1px solid var(--border-subtle);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .goal-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 3px;
-            height: 0;
-            background: var(--accent-gold);
-            transition: height 0.4s ease;
-        }
-
-        .goal-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(197, 160, 89, 0.3);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            background: var(--bg-surface-elevated);
-        }
-
-        .goal-card:hover::before {
-            height: 100%;
-        }
-
-        .goal-number {
-            font-family: var(--font-heading);
-            font-size: 3rem;
-            color: var(--border-subtle);
-            position: absolute;
-            top: 1rem;
-            right: 1.5rem;
-            transition: color 0.4s ease;
-        }
-
-        .goal-card:hover .goal-number {
-            color: var(--accent-gold-glow);
-        }
-
-        .goal-title {
             font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #ffffff;
-            position: relative;
-            z-index: 1;
+            font-family: var(--font-display);
         }
 
-        .goal-text {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            position: relative;
-            z-index: 1;
+        .mobile-menu-btn {
+            display: block;
         }
 
-        /* Interests & Skills */
-        .interests-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
+        .hero::before {
+            width: 80%;
+            transform: skewX(-10deg);
+            left: -20%;
         }
 
-        .interest-tag {
-            padding: 1rem 2rem;
-            border: 1px solid var(--border-subtle);
-            border-radius: 100px;
-            font-size: 1rem;
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
-            cursor: default;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .interest-tag::before {
-            content: '✧';
-            color: var(--accent-gold);
-            opacity: 0;
-            transform: scale(0);
-            transition: all 0.3s ease;
-            width: 0;
-        }
-
-        .interest-tag:hover {
-            border-color: var(--accent-gold);
-            color: #ffffff;
-            background: rgba(197, 160, 89, 0.05);
-        }
-
-        .interest-tag:hover::before {
-            opacity: 1;
-            transform: scale(1);
-            width: 15px;
-        }
-
-        /* Certifications */
-        .certs-list {
-            display: flex;
+        .footer-content {
             flex-direction: column;
-            gap: 1.5rem;
+            align-items: flex-start;
         }
+    }
 
-        .cert-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 2rem;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-subtle);
-            transition: all 0.3s ease;
+    /* Accessibility & Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            transition-duration: 0.01ms !important;
+            animation-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
         }
-
-        .cert-item:hover {
-            border-color: var(--accent-gold);
-            background: linear-gradient(90deg, var(--bg-surface), rgba(197, 160, 89, 0.05));
-        }
-
-        .cert-info h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.3rem;
-            font-family: var(--font-body);
-        }
-
-        .cert-org {
-            color: var(--accent-gold);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .cert-year {
-            font-family: var(--font-heading);
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            font-style: italic;
-        }
-
-        /* Footer */
-        footer {
-            padding: 4rem 10%;
-            text-align: center;
-            border-top: 1px solid var(--border-subtle);
-            background: var(--bg-surface);
-        }
-
-        .footer-logo {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            color: var(--accent-gold);
-            margin-bottom: 1rem;
-        }
-
-        /* Animations */
         .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-        }
-
-        .reveal.active {
             opacity: 1;
-            transform: translateY(0);
+            transform: none;
+            transition: none;
         }
+    }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none; /* Simplification for single file */
-            }
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
-            .section-line {
-                width: 100%;
-                height: 1px;
-            }
-            .cert-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
-        }
-    </style>
-</head>
-<body>
+    :focus-visible {
+        outline: 2px solid var(--accent-gold);
+        outline-offset: 4px;
+    }
+</style>
 
-    <nav>
-        <div class="nav-logo">A.S.</div>
-        <div class="nav-links">
-            <a href="#goals">Goals</a>
-            <a href="#interests">Interests</a>
-            <a href="#certifications">Certifications</a>
-        </div>
-    </nav>
+```
 
-    <header class="hero">
-        <div class="reveal">
-            <div class="hero-subtitle">Professional Portfolio</div>
-            <h1 class="hero-title">Shaping the future through <span class="gold-text">elegant strategy</span> and design.</h1>
-            <p class="hero-description">I bridge the gap between aesthetic sophistication and functional excellence, creating digital experiences that leave a lasting legacy.</p>
-            <a href="#goals" class="btn">Explore My Vision</a>
-        </div>
-    </header>
+```
+<nav id="navbar">
+    <a href="#hero" class="nav-logo" aria-label="Home">A. Reyes</a>
+    <ul class="nav-links" id="nav-links">
+        <li><a href="#story">Story</a></li>
+        <li><a href="#skills">Capabilities</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#credentials">Credentials</a></li>
+        <li><a href="#interests">Interests</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-expanded="false" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24" id="menu-icon">
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+        </svg>
+    </button>
+</nav>
 
-    <section id="goals">
-        <div class="section-header reveal">
-            <h2>Core Vision & Goals</h2>
-            <div class="section-line"></div>
-        </div>
-        <div class="goals-grid">
-            <div class="goal-card reveal">
-                <div class="goal-number">01</div>
-                <h3 class="goal-title">Architectural Mastery</h3>
-                <p class="goal-text">To architect scalable, resilient digital infrastructures that not only solve today's complex challenges but anticipate the demands of tomorrow.</p>
-            </div>
-            <div class="goal-card reveal" style="transition-delay: 0.1s;">
-                <div class="goal-number">02</div>
-                <h3 class="goal-title">Design Innovation</h3>
-                <p class="goal-text">Pushing the boundaries of user experience by merging classical design principles with cutting-edge interaction patterns.</p>
-            </div>
-            <div class="goal-card reveal" style="transition-delay: 0.2s;">
-                <div class="goal-number">03</div>
-                <h3 class="goal-title">Strategic Leadership</h3>
-                <p class="goal-text">Fostering environments of continuous learning and guiding cross-functional teams to deliver high-impact, transformative products.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="interests">
-        <div class="section-header reveal">
-            <h2>Professional Interests</h2>
-            <div class="section-line"></div>
-        </div>
-        <div class="interests-container reveal">
-            <div class="interest-tag">Cloud Solutions Architecture</div>
-            <div class="interest-tag">Human-Computer Interaction</div>
-            <div class="interest-tag">Artificial Intelligence Integration</div>
-            <div class="interest-tag">Blockchain Technologies</div>
-            <div class="interest-tag">Advanced Data Visualization</div>
-            <div class="interest-tag">Cybersecurity & Trust</div>
-            <div class="interest-tag">Sustainable Tech Initiatives</div>
-            <div class="interest-tag">Creative Coding (WebGL)</div>
-        </div>
-    </section>
-
-    <section id="certifications">
-        <div class="section-header reveal">
-            <h2>Credentials & Certifications</h2>
-            <div class="section-line"></div>
-        </div>
-        <div class="certs-list">
-            <div class="cert-item reveal">
-                <div class="cert-info">
-                    <h3>Solutions Architect Professional</h3>
-                    <span class="cert-org">Amazon Web Services</span>
-                </div>
-                <div class="cert-year">2025</div>
-            </div>
-            <div class="cert-item reveal">
-                <div class="cert-info">
-                    <h3>Advanced Interaction Design</h3>
-                    <span class="cert-org">Nielsen Norman Group</span>
-                </div>
-                <div class="cert-year">2024</div>
-            </div>
-            <div class="cert-item reveal">
-                <div class="cert-info">
-                    <h3>Professional Machine Learning Engineer</h3>
-                    <span class="cert-org">Google Cloud</span>
-                </div>
-                <div class="cert-year">2023</div>
-            </div>
-            <div class="cert-item reveal">
-                <div class="cert-info">
-                    <h3>Certified Scrum Professional (CSP-SM)</h3>
-                    <span class="cert-org">Scrum Alliance</span>
-                </div>
-                <div class="cert-year">2022</div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-logo">A.S.</div>
-        <p style="color: var(--text-secondary); font-size: 0.9rem;">
-            Forging excellence in the digital realm. <br>
-            &copy; 2026 All rights reserved.
+<header id="hero" class="hero">
+    <div class="hero-horizon"></div>
+    <div class="container hero-content">
+        <span class="label reveal">Strategy & Execution</span>
+        <h1 class="reveal" style="transition-delay: 0.1s;">Designing clarity from complexity.</h1>
+        <p class="lead reveal" style="transition-delay: 0.2s;">
+            I partner with ambitious organizations to bridge the gap between grand ideas and executable realities. Together, we build systems that scale and experiences that resonate.
         </p>
-    </footer>
+        <div class="btn-group reveal" style="transition-delay: 0.3s;">
+            <a href="#work" class="btn btn-primary">View Selected Work</a>
+            <a href="#story" class="btn btn-secondary">Read My Story</a>
+        </div>
+    </div>
+</header>
 
-    <script>
-        // Intersection Observer for scroll animations
-        const revealElements = document.querySelectorAll('.reveal');
+<section id="story">
+    <div class="container">
+        <div class="story-grid">
+            <div class="story-header reveal">
+                <span class="label">Background</span>
+                <h2 class="section-title">The architecture of good work.</h2>
+            </div>
+            <div class="story-text reveal" style="transition-delay: 0.2s;">
+                <p>
+                    My approach to work wasn't shaped in a vacuum. It grew from a persistent curiosity about how systems connect—how human behavior, technical constraints, and business goals constantly pull at one another.
+                </p>
+                <p>
+                    Early in my career, I realized that the most beautiful strategy is entirely useless if it cannot be operationalized. Since then, I have dedicated myself to the space where planning meets reality. I act as a translator across disciplines, ensuring that visionary ideas survive the friction of implementation.
+                </p>
+                <p>
+                    I don't just want to know what we are building; I want to understand why it matters, who it serves, and how we measure its truth.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
 
-        const revealOptions = {
-            threshold: 0.15,
-            rootMargin: "0px 0px -50px 0px"
-        };
+<section id="motivations" class="motivations">
+    <div class="container">
+        <span class="label reveal">Motivations</span>
+        <h2 class="editorial-quote reveal">"I am energized by problems that demand analytical rigor, yet can only be solved through deep human empathy."</h2>
+        
+        <div class="principles-grid">
+            <div class="principle-card reveal">
+                <h3>Clarity Over Cleverness</h3>
+                <p>I believe in removing friction. The best solutions are often the simplest ones, requiring intense discipline to strip away the unnecessary until only the essential remains.</p>
+            </div>
+            <div class="principle-card reveal" style="transition-delay: 0.1s;">
+                <h3>Sustainable Scaling</h3>
+                <p>Growth shouldn't break the foundation. I focus on building resilient frameworks that empower teams to adapt, expand, and thrive without burning out.</p>
+            </div>
+            <div class="principle-card reveal" style="transition-delay: 0.2s;">
+                <h3>Collaborative Truth</h3>
+                <p>The best answers rarely come from one person. I foster environments where debate is welcome, assumptions are tested, and the best idea wins regardless of hierarchy.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
-        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    return;
-                } else {
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, revealOptions);
+<section id="skills">
+    <div class="container">
+        <span class="label reveal">Capabilities</span>
+        <h2 class="section-title reveal">Where I create value.</h2>
+        
+        <div class="skills-container">
+            <div class="skill-group reveal">
+                <h3>Strategic Planning</h3>
+                <p>Translating ambiguous market opportunities into concrete, phased roadmaps. I help teams define what "winning" looks like and plot the exact coordinates to get there, mitigating risk along the way.</p>
+            </div>
+            <div class="skill-group reveal" style="transition-delay: 0.1s;">
+                <h3>Systems Architecture</h3>
+                <p>Designing workflows, operational models, and digital ecosystems that communicate seamlessly. I untangle legacy processes to create efficient, modern operational standards.</p>
+            </div>
+            <div class="skill-group reveal" style="transition-delay: 0.2s;">
+                <h3>Cross-functional Leadership</h3>
+                <p>Bridging the gap between engineering, design, and executive stakeholders. I create shared vocabularies so diverse teams can work together efficiently toward unified outcomes.</p>
+            </div>
+            <div class="skill-group reveal" style="transition-delay: 0.3s;">
+                <h3>Data-Informed Execution</h3>
+                <p>Establishing the right metrics. I build frameworks that look beyond vanity numbers to track actionable insights, ensuring every sprint and initiative serves the broader organizational health.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
-        revealElements.forEach(el => {
-            revealOnScroll.observe(el);
+<section id="work">
+    <div class="container">
+        <span class="label reveal">Selected Work</span>
+        <h2 class="section-title reveal">Evidence of impact.</h2>
+        
+        <div class="projects-list">
+            
+            <!-- Project 1 -->
+            <article class="project-item reveal">
+                <div class="project-header">
+                    <div>
+                        <span class="project-meta">2024 • Enterprise Systems</span>
+                        <h3 class="project-title">Platform Unification</h3>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <div>
+                        <p><strong>Context:</strong> A mid-size organization was losing efficiency due to siloed data across five distinct legacy platforms, resulting in duplicated effort and reporting blind spots.</p>
+                        <p><strong>Contribution & Outcome:</strong> I led a cross-functional task force to audit existing workflows, design a unified data architecture, and oversee the migration. The result was a 40% reduction in reporting time and the establishment of a single source of truth for global operations.</p>
+                        <a href="#contact" class="project-link">Request Full Case Study &rarr;</a>
+                    </div>
+                    <div>
+                        <h4 style="font-family: var(--font-sans); margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-ivory);">Applied Capabilities</h4>
+                        <div class="project-tags">
+                            <span class="tag">Systems Design</span>
+                            <span class="tag">Stakeholder Management</span>
+                            <span class="tag">Change Leadership</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Project 2 -->
+            <article class="project-item reveal">
+                <div class="project-header">
+                    <div>
+                        <span class="project-meta">2023 • Market Expansion</span>
+                        <h3 class="project-title">Strategic Entry Model</h3>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <div>
+                        <p><strong>Context:</strong> A regional service provider sought to enter three new national markets simultaneously without destabilizing their core business.</p>
+                        <p><strong>Contribution & Outcome:</strong> Developed a phased, scalable entry blueprint that isolated risk. By establishing modular operational pods, the client successfully launched in all three markets within 12 months, achieving ROI a full quarter ahead of projections.</p>
+                        <a href="#contact" class="project-link">Request Full Case Study &rarr;</a>
+                    </div>
+                    <div>
+                        <h4 style="font-family: var(--font-sans); margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-ivory);">Applied Capabilities</h4>
+                        <div class="project-tags">
+                            <span class="tag">Strategic Planning</span>
+                            <span class="tag">Risk Modeling</span>
+                            <span class="tag">Operations</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Project 3 -->
+            <article class="project-item reveal">
+                <div class="project-header">
+                    <div>
+                        <span class="project-meta">2022 • Process Optimization</span>
+                        <h3 class="project-title">The Velocity Initiative</h3>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <div>
+                        <p><strong>Context:</strong> Product delivery cycles had bloated, causing friction between engineering and product management teams and leading to missed market windows.</p>
+                        <p><strong>Contribution & Outcome:</strong> Implemented a tailored, lightweight agile framework emphasizing asynchronous communication and clearly defined handover rituals. Delivery predictability increased by 65%, and team morale scores improved significantly.</p>
+                        <a href="#contact" class="project-link">Request Full Case Study &rarr;</a>
+                    </div>
+                    <div>
+                        <h4 style="font-family: var(--font-sans); margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-ivory);">Applied Capabilities</h4>
+                        <div class="project-tags">
+                            <span class="tag">Process Engineering</span>
+                            <span class="tag">Agile Methodology</span>
+                            <span class="tag">Team Dynamics</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<section id="credentials">
+    <div class="container" style="max-width: 800px;">
+        <span class="label reveal">Credentials</span>
+        <h2 class="section-title reveal">Formal qualifications.</h2>
+        
+        <div class="credential-list">
+            <div class="credential-item reveal">
+                <div class="cred-details">
+                    <h3>Certified Strategic Professional (CSP)</h3>
+                    <span class="cred-org">Global Strategy Consortium</span>
+                </div>
+                <div class="cred-year">2023</div>
+            </div>
+            <div class="credential-item reveal">
+                <div class="cred-details">
+                    <h3>Advanced Systems Architecture</h3>
+                    <span class="cred-org">Technology Institute</span>
+                </div>
+                <div class="cred-year">2021</div>
+            </div>
+            <div class="credential-item reveal">
+                <div class="cred-details">
+                    <h3>Master of Business Administration</h3>
+                    <span class="cred-org">University Placeholder</span>
+                </div>
+                <div class="cred-year">2019</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="interests">
+    <div class="container">
+        <span class="label reveal">Professional Interests</span>
+        <h2 class="section-title reveal">Active curiosities.</h2>
+        <p class="reveal" style="max-width: 600px; margin-bottom: 3rem;">
+            I believe that professional value is driven by continuous exploration. Here is what I am currently reading about, researching, or experimenting with.
+        </p>
+        
+        <div class="interests-grid reveal">
+            <span class="interest-pill">Ethical AI Implementation</span>
+            <span class="interest-pill">Behavioral Economics</span>
+            <span class="interest-pill">Decentralized Organizational Structures</span>
+            <span class="interest-pill">Circular Economy Models</span>
+            <span class="interest-pill">Cognitive Load in UI/UX</span>
+            <span class="interest-pill">Systems Thinking</span>
+            <span class="interest-pill">Horology & Mechanical Design</span>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="contact">
+    <div class="container">
+        <span class="label reveal">Next Steps</span>
+        <h2 class="contact-title reveal">Let's build something enduring.</h2>
+        <p class="reveal" style="max-width: 600px; margin: 0 auto 2rem; color: var(--text-ivory);">
+            I am currently open to strategic partnerships, consulting roles, and challenging full-time opportunities where impact is prioritized.
+        </p>
+        
+        <a href="mailto:hello@placeholder.com" class="btn btn-primary reveal" style="font-size: 1.125rem; padding: 1.25rem 2.5rem;">Start a Conversation</a>
+        
+        <div class="contact-links reveal">
+            <a href="#linkedin" class="contact-link">LinkedIn Profile</a>
+            <a href="#github" class="contact-link">GitHub Repository</a>
+            <a href="#readcv" class="contact-link">Download CV (PDF)</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-brand">
+            <span class="footer-logo">A. Reyes</span>
+            <span class="footer-tagline">Designing clarity from complexity.</span>
+        </div>
+        
+        <div class="footer-links">
+            <a href="#hero">Top</a>
+            <a href="#story">Story</a>
+            <a href="#work">Work</a>
+            <a href="#contact">Contact</a>
+        </div>
+        
+        <div class="footer-copy">
+            <span style="color: var(--text-gray); font-size: 0.875rem;">&copy; <span id="year"></span>. All rights reserved.</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Set dynamic copyright year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile Menu Toggle
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const navLinks = document.getElementById('nav-links');
+    const menuIcon = document.getElementById('menu-icon');
+
+    mobileBtn.addEventListener('click', () => {
+        const isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true';
+        mobileBtn.setAttribute('aria-expanded', !isExpanded);
+        navLinks.classList.toggle('nav-active');
+        
+        // Change icon (Hamburger to X)
+        if (!isExpanded) {
+            menuIcon.innerHTML = '<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>';
+        } else {
+            menuIcon.innerHTML = '<path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>';
+        }
+    });
+
+    // Close mobile menu when a link is clicked
+    const navItems = document.querySelectorAll('.nav-links a');
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            if (navLinks.classList.contains('nav-active')) {
+                mobileBtn.click();
+            }
+        });
+    });
+
+    // Intersection Observer for scroll animations (Reveals)
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(element => {
+        observer.observe(element);
+    });
+
+    // Active Navigation Link on Scroll
+    const sections = document.querySelectorAll('section');
+    
+    window.addEventListener('scroll', () => {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (scrollY >= (sectionTop - 200)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navItems.forEach(a => {
+            a.classList.remove('active');
+            if (a.getAttribute('href') === `#${current}`) {
+                a.classList.add('active');
+            }
         });
         
-        // Trigger for initial load
-        setTimeout(() => {
-            document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('active'));
-        }, 100);
-    </script>
-</body>
-</html>
+        // Background blur adjustment for navbar on scroll
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+            navbar.style.background = 'rgba(23, 26, 31, 0.95)';
+            navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.5)';
+        } else {
+            navbar.style.background = 'rgba(23, 26, 31, 0.85)';
+            navbar.style.boxShadow = 'none';
+        }
+    });
+</script>
+
+```
