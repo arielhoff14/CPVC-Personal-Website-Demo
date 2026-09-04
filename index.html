@@ -1,155 +1,553 @@
 <!DOCTYPE html>
-<!--
-  ================================================================
-  READ THIS BEFORE YOU PASTE ANYTHING
-
-  When Gemini gives you a page, you do NOT paste it into a part of
-  this file. You replace the entire file.
-
-  Click into the editor, press Ctrl+A (Cmd+A on Mac), press Delete,
-  then paste. Everything here is meant to be thrown away.
-
-  Do that only AFTER your live link works. Get the link first.
-  ================================================================
--->
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>My first site</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --navy: #0d1d30;
-    --card: #142a44;
-    --line: #27466a;
-    --aqua: #6de1d7;
-    --text: #ffffff;
-    --muted: #94a9bf;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--navy);
-    color: var(--text);
-    font-family: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
-    line-height: 1.6;
-    display: flex;
-    justify-content: center;
-    padding: 6vh 20px;
-  }
-  main { width: 100%; max-width: 640px; }
-  .badge {
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--aqua);
-    margin-bottom: 18px;
-  }
-  h1 {
-    font-family: "Unbounded", "Manrope", sans-serif;
-    font-weight: 800;
-    font-size: clamp(38px, 9vw, 68px);
-    letter-spacing: -0.05em;
-    line-height: 1.02;
-    margin: 0 0 8px;
-  }
-  .name {
-    font-family: "Unbounded", "Manrope", sans-serif;
-    font-weight: 600;
-    font-size: clamp(18px, 4vw, 24px);
-    letter-spacing: -0.04em;
-    color: var(--aqua);
-    margin: 0 0 24px;
-  }
-  p.lead { font-size: 18px; color: var(--muted); margin: 0 0 34px; }
-  .card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 26px 28px;
-    margin-bottom: 18px;
-  }
-  .card h2 {
-    font-family: "Unbounded", "Manrope", sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    letter-spacing: -0.03em;
-    text-transform: uppercase;
-    color: var(--aqua);
-    margin: 0 0 16px;
-  }
-  ol { margin: 0; padding-left: 20px; }
-  li { margin-bottom: 12px; color: var(--muted); }
-  li:last-child { margin-bottom: 0; }
-  li b { color: var(--text); font-weight: 700; }
-  code {
-    font-family: ui-monospace, "SF Mono", Consolas, monospace;
-    font-size: 0.92em;
-    background: #0a1727;
-    border: 1px solid var(--line);
-    border-radius: 5px;
-    padding: 1px 6px;
-    color: var(--aqua);
-  }
-  a { color: var(--aqua); }
-  footer {
-    margin-top: 30px;
-    font-size: 14px;
-    color: #6e839a;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Regal Modern</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for Regal Dark Theme */
+        :root {
+            --bg-base: #09090b;
+            --bg-surface: #141418;
+            --bg-surface-elevated: #1e1e24;
+            --accent-gold: #c5a059;
+            --accent-gold-glow: rgba(197, 160, 89, 0.2);
+            --text-primary: #eaeaea;
+            --text-secondary: #9a9a9a;
+            --border-subtle: #2a2a35;
+            
+            --font-heading: 'Playfair Display', serif;
+            --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+        }
+
+        body {
+            overflow-x: hidden;
+            background: radial-gradient(circle at 50% 0%, #1a1a22 0%, var(--bg-base) 70%);
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Typography Highlights */
+        .gold-text {
+            color: var(--accent-gold);
+            font-style: italic;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(9, 9, 11, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+            transition: padding 0.3s ease;
+        }
+
+        .nav-logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--accent-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            width: 400px;
+            height: 400px;
+            background: var(--accent-gold);
+            filter: blur(150px);
+            opacity: 0.1;
+            border-radius: 50%;
+            z-index: -1;
+            transform: translateY(-50%);
+        }
+
+        .hero-subtitle {
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            max-width: 900px;
+        }
+
+        .hero-description {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-gold);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            color: var(--bg-base);
+        }
+
+        .btn:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 10%;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            color: #ffffff;
+        }
+
+        .section-line {
+            height: 1px;
+            flex-grow: 1;
+            background: linear-gradient(90deg, var(--accent-gold), transparent);
+            opacity: 0.5;
+        }
+
+        /* Goals Grid */
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .goal-card {
+            background: var(--bg-surface);
+            padding: 3rem 2rem;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .goal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--accent-gold);
+            transition: height 0.4s ease;
+        }
+
+        .goal-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(197, 160, 89, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: var(--bg-surface-elevated);
+        }
+
+        .goal-card:hover::before {
+            height: 100%;
+        }
+
+        .goal-number {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            color: var(--border-subtle);
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            transition: color 0.4s ease;
+        }
+
+        .goal-card:hover .goal-number {
+            color: var(--accent-gold-glow);
+        }
+
+        .goal-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .goal-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Interests & Skills */
+        .interests-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .interest-tag {
+            padding: 1rem 2rem;
+            border: 1px solid var(--border-subtle);
+            border-radius: 100px;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            cursor: default;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .interest-tag::before {
+            content: '✧';
+            color: var(--accent-gold);
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+            width: 0;
+        }
+
+        .interest-tag:hover {
+            border-color: var(--accent-gold);
+            color: #ffffff;
+            background: rgba(197, 160, 89, 0.05);
+        }
+
+        .interest-tag:hover::before {
+            opacity: 1;
+            transform: scale(1);
+            width: 15px;
+        }
+
+        /* Certifications */
+        .certs-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .cert-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .cert-item:hover {
+            border-color: var(--accent-gold);
+            background: linear-gradient(90deg, var(--bg-surface), rgba(197, 160, 89, 0.05));
+        }
+
+        .cert-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+            font-family: var(--font-body);
+        }
+
+        .cert-org {
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cert-year {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 10%;
+            text-align: center;
+            border-top: 1px solid var(--border-subtle);
+            background: var(--bg-surface);
+        }
+
+        .footer-logo {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Simplification for single file */
+            }
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            .section-line {
+                width: 100%;
+                height: 1px;
+            }
+            .cert-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-<main>
 
-  <span class="badge">Cal Poly Vibe Coding &middot; Session 01</span>
+    <nav>
+        <div class="nav-logo">A.S.</div>
+        <div class="nav-links">
+            <a href="#goals">Goals</a>
+            <a href="#interests">Interests</a>
+            <a href="#certifications">Certifications</a>
+        </div>
+    </nav>
 
-  <h1>It&rsquo;s live.</h1>
+    <header class="hero">
+        <div class="reveal">
+            <div class="hero-subtitle">Professional Portfolio</div>
+            <h1 class="hero-title">Shaping the future through <span class="gold-text">elegant strategy</span> and design.</h1>
+            <p class="hero-description">I bridge the gap between aesthetic sophistication and functional excellence, creating digital experiences that leave a lasting legacy.</p>
+            <a href="#goals" class="btn">Explore My Vision</a>
+        </div>
+    </header>
 
-  <!-- Step 5: change the name below to yours, then commit. -->
-  <p class="name">Built by Ariel Hoffman</p>
+    <section id="goals">
+        <div class="section-header reveal">
+            <h2>Core Vision & Goals</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="goals-grid">
+            <div class="goal-card reveal">
+                <div class="goal-number">01</div>
+                <h3 class="goal-title">Architectural Mastery</h3>
+                <p class="goal-text">To architect scalable, resilient digital infrastructures that not only solve today's complex challenges but anticipate the demands of tomorrow.</p>
+            </div>
+            <div class="goal-card reveal" style="transition-delay: 0.1s;">
+                <div class="goal-number">02</div>
+                <h3 class="goal-title">Design Innovation</h3>
+                <p class="goal-text">Pushing the boundaries of user experience by merging classical design principles with cutting-edge interaction patterns.</p>
+            </div>
+            <div class="goal-card reveal" style="transition-delay: 0.2s;">
+                <div class="goal-number">03</div>
+                <h3 class="goal-title">Strategic Leadership</h3>
+                <p class="goal-text">Fostering environments of continuous learning and guiding cross-functional teams to deliver high-impact, transformative products.</p>
+            </div>
+        </div>
+    </section>
 
-  <p class="lead">
-    This page is on the internet. Anyone you send this link to can open it,
-    on any device, right now. You made that happen in about five minutes.
-  </p>
+    <section id="interests">
+        <div class="section-header reveal">
+            <h2>Professional Interests</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="interests-container reveal">
+            <div class="interest-tag">Cloud Solutions Architecture</div>
+            <div class="interest-tag">Human-Computer Interaction</div>
+            <div class="interest-tag">Artificial Intelligence Integration</div>
+            <div class="interest-tag">Blockchain Technologies</div>
+            <div class="interest-tag">Advanced Data Visualization</div>
+            <div class="interest-tag">Cybersecurity & Trust</div>
+            <div class="interest-tag">Sustainable Tech Initiatives</div>
+            <div class="interest-tag">Creative Coding (WebGL)</div>
+        </div>
+    </section>
 
-  <div class="card">
-    <h2>Three things, in this order</h2>
-    <ol>
-      <li><b>Put your name on it.</b> Edit <code>index.html</code>, change
-        YOUR NAME HERE above, commit, refresh this page.</li>
-      <li><b>Submit this link.</b> Go to
-        <a href="https://www.calpolyvibecoding.com/">calpolyvibecoding.com</a>,
-        make an account, and paste this URL in. That is how you get counted,
-        and how Claude seats get assigned.</li>
-      <li><b>Then build.</b> Open Gemini, get a page, and replace this entire
-        file with it.</li>
-    </ol>
-  </div>
+    <section id="certifications">
+        <div class="section-header reveal">
+            <h2>Credentials & Certifications</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="certs-list">
+            <div class="cert-item reveal">
+                <div class="cert-info">
+                    <h3>Solutions Architect Professional</h3>
+                    <span class="cert-org">Amazon Web Services</span>
+                </div>
+                <div class="cert-year">2025</div>
+            </div>
+            <div class="cert-item reveal">
+                <div class="cert-info">
+                    <h3>Advanced Interaction Design</h3>
+                    <span class="cert-org">Nielsen Norman Group</span>
+                </div>
+                <div class="cert-year">2024</div>
+            </div>
+            <div class="cert-item reveal">
+                <div class="cert-info">
+                    <h3>Professional Machine Learning Engineer</h3>
+                    <span class="cert-org">Google Cloud</span>
+                </div>
+                <div class="cert-year">2023</div>
+            </div>
+            <div class="cert-item reveal">
+                <div class="cert-info">
+                    <h3>Certified Scrum Professional (CSP-SM)</h3>
+                    <span class="cert-org">Scrum Alliance</span>
+                </div>
+                <div class="cert-year">2022</div>
+            </div>
+        </div>
+    </section>
 
-  <div class="card">
-    <h2>How to replace this page</h2>
-    <ol>
-      <li>Copy what Gemini gives you with the <b>copy button</b> on the code
-        block. Do not click and drag.</li>
-      <li>Open <code>index.html</code> here and click the pencil icon.</li>
-      <li><b>Ctrl+A</b> (<b>Cmd+A</b> on Mac), then <b>Delete</b>. All of it.
-        Yes, really.</li>
-      <li>Paste, commit, refresh.</li>
-    </ol>
-  </div>
+    <footer>
+        <div class="footer-logo">A.S.</div>
+        <p style="color: var(--text-secondary); font-size: 0.9rem;">
+            Forging excellence in the digital realm. <br>
+            &copy; 2026 All rights reserved.
+        </p>
+    </footer>
 
-  <footer>
-    Nothing on this page is precious. It exists so the link has something to
-    show before you have something of your own.
-  </footer>
+    <script>
+        // Intersection Observer for scroll animations
+        const revealElements = document.querySelectorAll('.reveal');
 
-</main>
+        const revealOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => {
+            revealOnScroll.observe(el);
+        });
+        
+        // Trigger for initial load
+        setTimeout(() => {
+            document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('active'));
+        }, 100);
+    </script>
 </body>
 </html>
